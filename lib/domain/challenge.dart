@@ -1,7 +1,8 @@
+import 'phase_item.dart';
 import 'response.dart';
 import '../utils/DEBUG_CONSTANTS.dart';
 
-class Challenge {
+class Challenge extends PhaseItem {
   final String value;
   final Response response;
 
