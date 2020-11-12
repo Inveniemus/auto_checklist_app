@@ -8,6 +8,7 @@ abstract class PhaseItem {
   bool get isActive => status == ITEM_STATUS.ACTIVE;
 
   void activate() => status = ITEM_STATUS.ACTIVE;
+  void finish() => status = ITEM_STATUS.DONE;
 }
 
 enum ITEM_STATUS { PENDING, ACTIVE, DONE }
