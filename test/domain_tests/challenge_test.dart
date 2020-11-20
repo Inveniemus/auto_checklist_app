@@ -14,7 +14,7 @@ void main() {
     String output = challenge.toString();
     expect(output.length, DEBUG_CONSTANTS.lineLength);
     expect(output.substring(0, 9), 'BARO REF ');
-    expect(output.endsWith('... SET ____'), true);
+    expect(output.endsWith('... SET ____ ?'), true);
   });
 
   test('A Challenge is a PhaseItem', () {

@@ -9,13 +9,14 @@ class Phase {
 
   Phase(this.title, this.items) : assert(items.isNotEmpty);
 
+  // Todo: Make it unrepresentable if no active item
   PhaseItem get activeItem =>
       items.firstWhere((item) => item.isActive, orElse: () => null);
 
   int get activeIndex => activeItem == null ? -1 : items.indexOf(activeItem);
 
   PHASE_STATUS get status {
-    if (items.last.status == ITEM_STATUS.DONE) return PHASE_STATUS.DONE;
+    if (items.last.status == ITEM_STATUS.done) return PHASE_STATUS.DONE;
     if (activeItem != null) return PHASE_STATUS.ACTIVE;
     return PHASE_STATUS.PENDING;
   }
@@ -44,6 +45,16 @@ class Phase {
       items[activeIndex + 1].activate();
       items[activeIndex].finish();
     }
+    return activeItem;
+  }
+
+  @override
+  String toString() {
+    String formattedString = title + '\n' ?? '';
+    for (var item in items) {
+      formattedString += item.toString() + '\n';
+    }
+    return formattedString;
   }
 }
 
