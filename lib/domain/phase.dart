@@ -16,14 +16,25 @@ class Phase {
   int get activeIndex => activeItem == null ? -1 : items.indexOf(activeItem);
 
   PHASE_STATUS get status {
-    if (items.last.status == ITEM_STATUS.done) return PHASE_STATUS.DONE;
-    if (activeItem != null) return PHASE_STATUS.ACTIVE;
-    return PHASE_STATUS.PENDING;
+    if (items.last.status == ITEM_STATUS.done) return PHASE_STATUS.done;
+    if (activeItem != null) return PHASE_STATUS.active;
+    return PHASE_STATUS.pending;
   }
 
-  bool get isPending => status == PHASE_STATUS.PENDING;
-  bool get isActive => status == PHASE_STATUS.ACTIVE;
-  bool get isDone => status == PHASE_STATUS.DONE;
+  bool get isPending => status == PHASE_STATUS.pending;
+  bool get isNotPending => !isPending;
+
+  bool get isActive => status == PHASE_STATUS.active;
+  bool get isNotActive => !isActive;
+
+  bool get isDone => status == PHASE_STATUS.done;
+  bool get isNotDone => !isDone;
+
+  void reset() {
+    for (final item in items) {
+      item.reset();
+    }
+  }
 
   /// Activates the Phase and the first PhaseItem, and returns it.
   PhaseItem start() {
@@ -37,7 +48,7 @@ class Phase {
   /// simply mark it as DONE and returns null;
   PhaseItem next() {
     assert(isActive);
-    int phaseLength = items.length;
+    final int phaseLength = items.length;
     if (activeIndex + 1 == phaseLength) {
       activeItem.finish();
       return null;
@@ -50,12 +61,12 @@ class Phase {
 
   @override
   String toString() {
-    String formattedString = title + '\n' ?? '';
-    for (var item in items) {
-      formattedString += item.toString() + '\n';
+    String formattedString = '$title\n' ?? '';
+    for (final item in items) {
+      formattedString += '$item\n';
     }
     return formattedString;
   }
 }
 
-enum PHASE_STATUS { PENDING, ACTIVE, DONE }
+enum PHASE_STATUS { pending, active, done }

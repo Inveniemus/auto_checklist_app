@@ -5,10 +5,13 @@
 abstract class PhaseItem {
   ITEM_STATUS status = ITEM_STATUS.pending;
 
+  bool get isPending => status == ITEM_STATUS.pending;
   bool get isActive => status == ITEM_STATUS.active;
+  bool get isDone => status == ITEM_STATUS.done;
 
   void activate() => status = ITEM_STATUS.active;
   void finish() => status = ITEM_STATUS.done;
+  void reset() => status = ITEM_STATUS.pending;
 
   @override
   String toString();

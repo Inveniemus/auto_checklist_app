@@ -42,12 +42,12 @@ void main() {
   });
 
   test('On construction, a phase shall be pending', () {
-    expect(dummyPhase1.status, PHASE_STATUS.PENDING);
+    expect(dummyPhase1.status, PHASE_STATUS.pending);
   });
 
   test('On start, a phase shall have its first item active', () {
     dummyPhase1.start();
-    expect(dummyPhase1.status, PHASE_STATUS.ACTIVE);
+    expect(dummyPhase1.status, PHASE_STATUS.active);
     expect(dummyPhase1.items.first.isActive, true);
   });
 
@@ -60,7 +60,7 @@ void main() {
   test(
       'A Phase with all its items DONE shall be DONE and active index shall'
       ' return -1', () {
-    expect(donePhase.status, PHASE_STATUS.DONE);
+    expect(donePhase.status, PHASE_STATUS.done);
     expect(donePhase.activeIndex, -1);
     expect(donePhase.activeItem, null);
   });
@@ -107,6 +107,13 @@ void main() {
           'CHALLENGE3 ......................................................... RESPONSE3 ?\n'
           '______________________________________________________________________________\n'
           'CHALLENGE4 ......................................................... RESPONSE4 ?\n');
+    });
+  });
+
+  group('reset() method tests', () {
+    test('reset() changes the status of the Phase to pending', () {
+      almostDone.reset();
+      expect(almostDone.isPending, true);
     });
   });
 }
