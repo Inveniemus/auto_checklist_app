@@ -51,6 +51,10 @@ void main() {
     expect(dummyPhase1.items.first.isActive, true);
   });
 
+  test('On construction, an empty list of items should be impossible', () {
+    expect(() => Phase('WillThrow', []), throwsAssertionError);
+  });
+
   test('On start, active index shall be 0', () {
     expect(dummyPhase1.activeIndex, equals(-1));
     dummyPhase1.start();
@@ -114,6 +118,10 @@ void main() {
     test('reset() changes the status of the Phase to pending', () {
       almostDone.reset();
       expect(almostDone.isPending, true);
+      expect(
+          almostDone.items
+              .indexWhere((element) => element.isNotPending == true),
+          -1);
     });
   });
 }

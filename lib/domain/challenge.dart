@@ -1,6 +1,6 @@
+import '../utils/DEBUG_CONSTANTS.dart';
 import 'phase_item.dart';
 import 'response.dart';
-import '../utils/DEBUG_CONSTANTS.dart';
 
 class Challenge extends PhaseItem {
   final String value;
@@ -11,11 +11,11 @@ class Challenge extends PhaseItem {
   @override
   String toString() {
     // Dots calculation and building
-    var numberOfDots =
+    final numberOfDots =
         DEBUG_CONSTANTS.lineLength - value.length - response.value.length - 4;
     assert(numberOfDots > 0);
-    var dotsList = List.filled(numberOfDots, '.');
-    var buffer = StringBuffer();
+    final dotsList = List.filled(numberOfDots, '.');
+    final buffer = StringBuffer();
     buffer.writeAll(dotsList);
 
     // Status
@@ -34,6 +34,6 @@ class Challenge extends PhaseItem {
         statusStr = '?!';
     }
 
-    return value + ' ' + buffer.toString() + ' ' + response.value + statusStr;
+    return '$value $buffer ${response.value}$statusStr';
   }
 }

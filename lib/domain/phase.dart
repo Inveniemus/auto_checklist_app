@@ -61,11 +61,11 @@ class Phase {
 
   @override
   String toString() {
-    String formattedString = '$title\n' ?? '';
-    for (final item in items) {
-      formattedString += '$item\n';
-    }
-    return formattedString;
+    final buffer = StringBuffer();
+    buffer.write('$title\n' ?? '');
+    buffer.writeAll(items, '\n');
+    buffer.write('\n');
+    return buffer.toString();
   }
 }
 

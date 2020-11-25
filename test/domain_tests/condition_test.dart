@@ -61,4 +61,20 @@ void main() {
       expect(condition.isDone, true);
     });
   });
+
+  group('on reset() method', () {
+    setUp(() {
+      condition.activate();
+      condition.subPhase.next();
+    });
+
+    test('condition shall be pending', () {
+      condition.reset();
+      expect(condition.isPending, true);
+    });
+  });
+
+  group('toString() method', () {
+
+  });
 }
