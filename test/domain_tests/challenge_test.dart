@@ -10,11 +10,11 @@ void main() {
   final dummyChallenge = Challenge('CHALLENGE', Response('RESPONSE'));
 
   test('Challenge prints correctly', () {
-    var challenge = Challenge('BARO REF', Response('SET ____'));
-    String output = challenge.toString();
+    final challenge = Challenge('BARO REF', Response('SET ____'));
+    final String output = challenge.toString();
     expect(output.length, DEBUG_CONSTANTS.lineLength);
-    expect(output.substring(0, 9), 'BARO REF ');
-    expect(output.endsWith('... SET ____ ?'), true);
+    expect(output.substring(0, 9), 'BARO REF.');
+    expect(output.endsWith('...SET ____ ?'), true);
   });
 
   test('A Challenge is a PhaseItem', () {

@@ -34,4 +34,17 @@ class Condition extends PhaseItem {
     subPhase.reset();
     super.reset();
   }
+
+  @override
+  String toString() {
+    // Indent correctly
+    subPhase.addIndent(indentLength);
+    final buffer = StringBuffer();
+    buffer.write(indentString);
+    buffer.writeAll([value, '\n']);
+    for (final item in subPhase.items) {
+      buffer.writeAll([item, '\n']);
+    }
+    return buffer.toString();
+  }
 }

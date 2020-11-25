@@ -59,6 +59,14 @@ class Phase {
     return activeItem;
   }
 
+  void addIndent(int startIndent) {
+    for (final item in items) {
+      while (item.indentLength <= startIndent) {
+        item.indent();
+      }
+    }
+  }
+
   @override
   String toString() {
     final buffer = StringBuffer();

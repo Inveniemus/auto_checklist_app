@@ -1,3 +1,4 @@
+import 'package:auto_checklist_app/domain/line.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:auto_checklist_app/domain/condition.dart';
@@ -12,14 +13,18 @@ void main() {
     final subPhase = Phase('DUMMY', [
       Challenge('CHALLENGE1', Response('RESPONSE1')),
       Challenge('CHALLENGE2', Response('RESPONSE2')),
+      Condition(
+          'Sub condition?',
+          Phase(null, [
+            Challenge('CHALLENGEC1', Response('RESPONSEC1')),
+            Challenge('CHALLENGEC2', Response('RESPONSEC2')),
+          ])),
       Challenge('CHALLENGE3', Response('RESPONSE3')),
+      Line(),
       Challenge('CHALLENGE4', Response('RESPONSE4')),
     ]);
 
-    condition = Condition(
-        'Is this condition true?',
-        subPhase
-    );
+    condition = Condition('Is this condition true?', subPhase);
   });
 
   group('On construction', () {
@@ -37,7 +42,6 @@ void main() {
   });
 
   group('on activate() method', () {
-
     setUp(() {
       condition.activate();
     });
@@ -52,7 +56,6 @@ void main() {
   });
 
   group('on finish() method', () {
-
     setUp(() {
       condition.finish();
     });
@@ -75,6 +78,19 @@ void main() {
   });
 
   group('toString() method', () {
-
+    test('shall return the correct String', () {
+      expect(
+          condition.toString(),
+          'Is this condition true?\n'
+          '  CHALLENGE1.........................................................RESPONSE1 ?\n'
+          '  CHALLENGE2.........................................................RESPONSE2 ?\n'
+          '  Sub condition?\n'
+          '    CHALLENGEC1.....................................................RESPONSEC1 ?\n'
+          '    CHALLENGEC2.....................................................RESPONSEC2 ?\n'
+          '\n'
+          '  CHALLENGE3.........................................................RESPONSE3 ?\n'
+          '  ============================================================================\n'
+          '  CHALLENGE4.........................................................RESPONSE4 ?\n');
+    });
   });
 }

@@ -37,4 +37,10 @@ void main() {
     expect(dummy.isActive, false);
     expect(dummy.isDone, false);
   });
+
+  test('indentString getter', () {
+    expect(dummy.indentString, '');
+    dummy.indent();
+    expect(dummy.indentString, '  ');
+  });
 }

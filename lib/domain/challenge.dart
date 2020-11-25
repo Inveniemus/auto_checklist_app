@@ -10,30 +10,34 @@ class Challenge extends PhaseItem {
 
   @override
   String toString() {
-    // Dots calculation and building
-    final numberOfDots =
-        DEBUG_CONSTANTS.lineLength - value.length - response.value.length - 4;
-    assert(numberOfDots > 0);
-    final dotsList = List.filled(numberOfDots, '.');
     final buffer = StringBuffer();
-    buffer.writeAll(dotsList);
+    buffer.write(indentString);
+    buffer.write(value);
+    final numberOfDots = DEBUG_CONSTANTS.lineLength -
+        indentLength -
+        value.length -
+        response.value.length -
+        2;
+    assert(numberOfDots > 0);
+    buffer.writeAll(List.filled(numberOfDots, '.'));
+
+    buffer.write(response.value);
 
     // Status
-    String statusStr;
-    switch(status) {
+    switch (status) {
       case ITEM_STATUS.pending:
-        statusStr = ' ?';
+        buffer.write(' ?');
         break;
       case ITEM_STATUS.done:
-        statusStr = ' -';
+        buffer.write(' -');
         break;
       case ITEM_STATUS.active:
-        statusStr = ' !';
+        buffer.write(' !');
         break;
       default:
-        statusStr = '?!';
+        buffer.write('?!');
     }
 
-    return '$value $buffer ${response.value}$statusStr';
+    return buffer.toString();
   }
 }
