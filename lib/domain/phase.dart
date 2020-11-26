@@ -70,7 +70,9 @@ class Phase {
   @override
   String toString() {
     final buffer = StringBuffer();
-    buffer.write('$title\n' ?? '');
+    if (title != null) {
+      buffer.write('$title\n');
+    }
     buffer.writeAll(items, '\n');
     buffer.write('\n');
     return buffer.toString();
