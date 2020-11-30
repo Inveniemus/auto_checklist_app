@@ -21,7 +21,17 @@ class CheckListPage extends StatelessWidget {
               itemCount: checklist.phases.length,
               itemBuilder: (context, index) =>
                   PhaseWidget(checklist.phases[index])),
-        )
+        ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: [
+            Spacer(),
+            Icon(Icons.replay, size: 50, color: Colors.amber,),
+            Icon(Icons.play_arrow, size: 50, color: Colors.blue,),
+            Spacer()
+          ],
+        ),
+      ),
     );
   }
 }
